@@ -1,0 +1,5 @@
+Test Library A
+
+Depends on nothing
+
+A test library for cpp multi environment ci using conan, jenkins and docker
