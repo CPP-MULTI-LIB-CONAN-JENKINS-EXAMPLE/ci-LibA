@@ -1,0 +1,52 @@
+on: push
+environment: CI
+
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-18.04'
+      python-arch: "x64"
+      python-version: "3.6.x"
+      conan_base_profile : "linux-gcc7-amd64"
+#    mac:
+#      imageName: 'macos-10.13'
+#      python-arch: "x64"
+#      python-version: "3.6.x"
+#      install-headerfiles : false
+#    windows:
+#      imageName: 'vs2017-win2016'
+#      vs-version: 15
+#      python-arch: "x86"
+#      python-version: "2.7.x"
+#      install-headerfiles : false
+
+pool:
+  vmImage: $(imageName)
+
+variables:
+  CONAN_LOGIN_USERNAME: "ci_user"
+  CONAN_PASSWORD: ${{ secrets.JF_ARTIFACTORY_SECRET }}
+  CONAN_CONFIG_URL: "https://github.com/traact/bincrafters-config.git"
+  CONAN_USERNAME: "camposs"      
+  CONAN_UPLOAD_DEPENDENCIES: True  
+  CONAN_CHANNEL: "latest"
+  CONAN_STABLE_BRANCH_PATTERN: "release/*"  
+  CONAN_UPLOAD: "https://traact.jfrog.io/artifactory/api/conan/traact-conan"    
+  CONAN_BUILD_POLICY: "outdated"  
+  CONAN_BUILD_TYPES: "Debug, Release"
+  CONAN_BASE_PROFILE: $(conan_base_profile)
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: $(python-version)
+      addToPath: true
+      architecture: $(python-arch)  
+  - script: pip install conan
+    displayName: Installing Conan
+  - script: pip install conan_package_tools
+    displayName: Installing Conan package tools
+  - script: conan user
+    displayName: Generating conan data directory
+  - script: python build.py
+    displayName: Building the solution
