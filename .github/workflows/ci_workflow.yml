@@ -1,6 +1,6 @@
 name: Test github ci
 on: push
-environment: CI
+
 
 jobs:
   test:
@@ -40,7 +40,7 @@ jobs:
         python build.py
       env:
         CONAN_LOGIN_USERNAME: "ci_user"
-        CONAN_PASSWORD: ${{ secrets.JF_ARTIFACTORY_SECRET }}
+        CONAN_PASSWORD: ${{ secrets.CI_PASSWORD }}
         CONAN_CONFIG_URL: "https://github.com/traact/bincrafters-config.git"
         CONAN_USERNAME: "camposs"      
         CONAN_UPLOAD_DEPENDENCIES: True  
