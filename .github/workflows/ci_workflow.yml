@@ -47,7 +47,7 @@ jobs:
         CONAN_CHANNEL: "latest"
         CONAN_STABLE_BRANCH_PATTERN: "release/*"  
         CONAN_UPLOAD: "https://traact.jfrog.io/artifactory/api/conan/traact-conan"    
-        CONAN_BUILD_POLICY: "outdated"  
-        CONAN_BUILD_TYPES: "Debug, Release"
+        CONAN_BUILD_POLICY: "outdated"          
         CONAN_BASE_PROFILE: ${{ matrix.conan_base_profile }}
         CONAN_REVISIONS_ENABLED: 1
+        
