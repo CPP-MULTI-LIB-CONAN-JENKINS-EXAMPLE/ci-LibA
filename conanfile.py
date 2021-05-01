@@ -4,7 +4,7 @@ from conans import ConanFile, CMake, tools
 
 class LibA(ConanFile):
     name = "LibA"
-    version = "0.0.1"
+    version = "0.0.2"
     default_user = "testuser"
     default_channel = "stable"
 
