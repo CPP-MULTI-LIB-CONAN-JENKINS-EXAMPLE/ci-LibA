@@ -6,7 +6,7 @@ Copyright (c) 2020 Frieder Pankratz
 
 int testproject::libAFunction(int i) {
   if (i <= 10)
-    return i + 2;
+    return i + 3;
   else
     return i - 1;
 }
